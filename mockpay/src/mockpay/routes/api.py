@@ -3,7 +3,7 @@
 from datetime import date
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, Header, Query
+from fastapi import APIRouter, Body, Depends, Header, Query
 from fastapi.responses import JSONResponse
 
 from mockpay import events, orders, payments, refunds
@@ -21,6 +21,47 @@ IdempotencyKey = Annotated[
 
 router = APIRouter(prefix="/v1", dependencies=[Depends(require_api_key)])
 
+# Bodies that work as they stand when "Try it out" in /docs pre-fills them. Without these,
+# Swagger fills optional fields with placeholders such as "return_url": "string", which fail.
+NewOrder = Annotated[
+    OrderCreate,
+    Body(
+        openapi_examples={
+            "booking": {
+                "summary": "A RailSeat booking",
+                "value": {
+                    "amount_paise": 125000,
+                    "currency": "INR",
+                    "receipt": "PNR0000001",
+                    "return_url": "http://localhost:5173/bookings",
+                },
+            }
+        }
+    ),
+]
+NewRefund = Annotated[
+    RefundCreate,
+    Body(
+        openapi_examples={
+            "partial": {
+                "summary": "A partial refund: put your payment's id in payment_id",
+                "value": {"payment_id": "pay_your_payment_id", "amount_paise": 50000},
+            }
+        }
+    ),
+]
+Resend = Annotated[
+    WebhookResend,
+    Body(
+        openapi_examples={
+            "three_copies": {
+                "summary": "Three copies at once: put an id from GET /v1/events in event_id",
+                "value": {"event_id": "evt_your_event_id", "copies": 3},
+            }
+        }
+    ),
+]
+
 
 def created(body: dict[str, Any], replayed: bool) -> JSONResponse:
     """201 Created. A replayed answer says so in a header, as Stripe does."""
@@ -30,7 +71,7 @@ def created(body: dict[str, Any], replayed: bool) -> JSONResponse:
 
 @router.post("/orders", status_code=201, tags=["Orders"], summary="Create an order")
 async def create_order(
-    body: OrderCreate, ctx: Ctx, idempotency_key: IdempotencyKey = None
+    body: NewOrder, ctx: Ctx, idempotency_key: IdempotencyKey = None
 ) -> JSONResponse:
     answer, replayed = run_idempotent(
         ctx,
@@ -60,7 +101,7 @@ async def get_payment(payment_id: str, ctx: Ctx) -> dict[str, Any]:
 
 @router.post("/refunds", status_code=201, tags=["Refunds"], summary="Refund a payment")
 async def create_refund(
-    body: RefundCreate, ctx: Ctx, idempotency_key: IdempotencyKey = None
+    body: NewRefund, ctx: Ctx, idempotency_key: IdempotencyKey = None
 ) -> JSONResponse:
     answer, replayed = run_idempotent(
         ctx,
@@ -83,7 +124,7 @@ async def get_settlement(
 @router.post(
     "/simulate/webhook", status_code=202, tags=["Webhooks"], summary="Send a past event again"
 )
-async def simulate_webhook(body: WebhookResend, ctx: Ctx) -> dict[str, Any]:
+async def simulate_webhook(body: Resend, ctx: Ctx) -> dict[str, Any]:
     delivery_ids = events.resend_event(ctx, body.event_id, body.copies)
     return {"event_id": body.event_id, "deliveries": delivery_ids, "status": "scheduled"}
 
