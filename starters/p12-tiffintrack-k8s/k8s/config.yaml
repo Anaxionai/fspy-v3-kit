@@ -1,0 +1,14 @@
+# TiffinTrack's plain settings (task 10). Passwords go in the Secret, never here.
+# Until task 10 this file holds only comments, so kubectl apply -f k8s/ skips it.
+# TODO(task 10): select every line from "# apiVersion" to the end, press Ctrl+/ in VS Code to
+#   uncomment them, then fill in every TODO. Every value is text, so quote numbers.
+#
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: tiffintrack-config
+# data:
+#   REDIS_URL: # TODO(task 10): Redis's address, by its Service name
+#   API_URL: # TODO(task 10): the API's address, by its Service name
+#   MONGO_DB: # TODO(task 10): the database name
+#   LOG_LEVEL: # TODO(task 10): the log level

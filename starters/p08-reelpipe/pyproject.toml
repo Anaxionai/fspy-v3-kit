@@ -1,0 +1,23 @@
+[project]
+name = "reelpipe"
+version = "0.1.0"
+description = "ReelPipe: phone videos go straight to object storage, and a queue worker makes a thumbnail and a 480p copy."
+requires-python = ">=3.12"
+dependencies = [
+    "azure-storage-blob>=12.31.1",
+    "boto3>=1.43.127",
+    "fastapi[standard]>=0.162.3",
+    "google-cloud-pubsub>=2.43.0",
+    "google-cloud-storage>=3.17.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+# Where the tests find your code: the `app` package in api/, `worker` (worker/worker.py)
+# and `handler` (lambda/handler.py). `lambda` is a Python keyword, so it cannot be a package name.
+pythonpath = ["api", "worker", "lambda"]
+testpaths = ["tests"]

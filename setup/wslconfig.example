@@ -1,0 +1,21 @@
+# FSPY-V3 course kit: WSL 2 settings for a laptop with 8 GB of memory.
+#
+# Copy this file to your Windows user folder as .wslconfig. In Git Bash:
+#     cp ~/fspy-v3-kit/setup/wslconfig.example ~/.wslconfig
+# Then run this in PowerShell, and wait 8 seconds before you start Docker Desktop again:
+#     wsl --shutdown
+#
+# Docker Desktop runs inside WSL 2, so these limits apply to Docker and every container too.
+# Windows keeps the rest of the memory for VS Code, the browser and everything else.
+
+[wsl2]
+# WSL 2 and Docker may use at most 4 GB of memory.
+# On a laptop with 16 GB of memory, change this line to: memory=8GB
+memory=4GB
+
+# When Linux needs more than its memory, it uses up to 2 GB of disk as slower, extra memory.
+swap=2GB
+
+[experimental]
+# Give memory that Linux no longer uses back to Windows, a little at a time.
+autoMemoryReclaim=gradual

@@ -1,0 +1,30 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "RailSeat API: train search and seat booking (FSPY-V3, P3)"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.20.1",
+    "asyncpg>=0.32.0",
+    "fastapi[standard]>=0.162.3",
+    "sqlalchemy[asyncio]>=2.1.8",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+# Lets the tests import the `app` package from this folder.
+pythonpath = ["."]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI's Depends(), Query() and friends are meant to be default values.
+extend-immutable-calls = [
+    "fastapi.Body",
+    "fastapi.Depends",
+    "fastapi.Header",
+    "fastapi.Path",
+    "fastapi.Query",
+]

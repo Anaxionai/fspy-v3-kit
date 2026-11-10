@@ -1,0 +1,121 @@
+number,name,type,from_station,to_station,runs_on
+12333,New Delhi Mumbai Rajdhani Express,Rajdhani,NDLS,BCT,Mon Tue Wed Thu Fri Sat Sun
+12334,Mumbai New Delhi Rajdhani Express,Rajdhani,BCT,NDLS,Mon Tue Wed Thu Fri Sat Sun
+22551,New Delhi Mumbai Superfast Express,Superfast,NDLS,BCT,Mon Tue Wed Thu Fri Sat Sun
+22552,Mumbai New Delhi Superfast Express,Superfast,BCT,NDLS,Mon Tue Wed Thu Fri Sat Sun
+22281,New Delhi Mumbai Duronto Express,Duronto,NDLS,BCT,Mon Tue Wed Thu Fri Sat Sun
+22282,Mumbai New Delhi Duronto Express,Duronto,BCT,NDLS,Mon Tue Wed Thu Fri Sat Sun
+22257,Delhi Mumbai Garib Rath Express,Garib Rath,NZM,BCT,Tue Thu Sun
+22258,Mumbai Delhi Garib Rath Express,Garib Rath,BCT,NZM,Tue Thu Sat
+20573,Delhi Mumbai Rajdhani Express,Rajdhani,NZM,CSMT,Mon Tue Wed Thu Fri Sat Sun
+20574,Mumbai Delhi Rajdhani Express,Rajdhani,CSMT,NZM,Mon Tue Wed Thu Fri Sat Sun
+12657,Delhi Mumbai Mail,Mail,NZM,CSMT,Mon Tue Wed Thu Fri Sat Sun
+12658,Mumbai Delhi Mail,Mail,CSMT,NZM,Mon Tue Wed Thu Fri Sat Sun
+12439,New Delhi Howrah Rajdhani Express,Rajdhani,NDLS,HWH,Mon Tue Wed Thu Fri Sat Sun
+12440,Howrah New Delhi Rajdhani Express,Rajdhani,HWH,NDLS,Mon Tue Wed Thu Fri Sat Sun
+22997,New Delhi Howrah Superfast Express,Superfast,NDLS,HWH,Tue Wed Thu Sat Sun
+22998,Howrah New Delhi Superfast Express,Superfast,HWH,NDLS,Mon Tue Thu Fri Sat
+22249,New Delhi Howrah Duronto Express,Duronto,NDLS,HWH,Mon Tue Wed Thu Fri Sat Sun
+22250,Howrah New Delhi Duronto Express,Duronto,HWH,NDLS,Mon Tue Wed Thu Fri Sat Sun
+12435,Delhi Chennai Rajdhani Express,Rajdhani,NZM,MAS,Mon Tue Wed Thu Fri Sat Sun
+12436,Chennai Delhi Rajdhani Express,Rajdhani,MAS,NZM,Mon Tue Wed Thu Fri Sat Sun
+11211,Delhi Chennai Express,Express,NZM,MAS,Mon Thu
+11212,Chennai Delhi Express,Express,MAS,NZM,Thu Sun
+12421,Delhi Bengaluru Rajdhani Express,Rajdhani,NZM,SBC,Mon Tue Wed Thu Fri Sat Sun
+12422,Bengaluru Delhi Rajdhani Express,Rajdhani,SBC,NZM,Mon Tue Wed Thu Fri Sat Sun
+12601,Delhi Bengaluru Superfast Express,Superfast,NZM,SBC,Mon Tue Wed Fri Sat
+12602,Bengaluru Delhi Superfast Express,Superfast,SBC,NZM,Mon Wed Thu Fri Sun
+12117,Mumbai Chennai Mail,Mail,CSMT,MAS,Mon Tue Wed Thu Fri Sat Sun
+12118,Chennai Mumbai Mail,Mail,MAS,CSMT,Mon Tue Wed Thu Fri Sat Sun
+22501,Mumbai Bengaluru Superfast Express,Superfast,CSMT,SBC,Mon Tue Wed Thu Fri Sat Sun
+22502,Bengaluru Mumbai Superfast Express,Superfast,SBC,CSMT,Mon Tue Wed Thu Fri Sat Sun
+12129,Mumbai Howrah Mail,Mail,CSMT,HWH,Mon Tue Wed Thu Fri Sat Sun
+12130,Howrah Mumbai Mail,Mail,HWH,CSMT,Mon Tue Wed Thu Fri Sat Sun
+12225,Mumbai Howrah Duronto Express,Duronto,CSMT,HWH,Mon Thu Sat
+12226,Howrah Mumbai Duronto Express,Duronto,HWH,CSMT,Mon Wed Sat
+22723,Chennai Howrah Superfast Express,Superfast,MAS,HWH,Mon Tue Thu Fri Sun
+22724,Howrah Chennai Superfast Express,Superfast,HWH,MAS,Tue Wed Thu Sat Sun
+19801,Chennai Howrah Express,Express,MAS,HWH,Mon Tue Wed Thu Fri Sat Sun
+19802,Howrah Chennai Express,Express,HWH,MAS,Mon Tue Wed Thu Fri Sat Sun
+12033,Chennai Mysuru Shatabdi Express,Shatabdi,MAS,MYS,Mon Tue Wed Thu Fri Sat Sun
+12034,Mysuru Chennai Shatabdi Express,Shatabdi,MYS,MAS,Mon Tue Wed Thu Fri Sat Sun
+26099,Chennai Mysuru Vande Bharat Express,Vande Bharat,MAS,MYS,Mon Tue Wed Thu Fri Sat
+26100,Mysuru Chennai Vande Bharat Express,Vande Bharat,MYS,MAS,Tue Wed Thu Fri Sat Sun
+12175,Chennai Thiruvananthapuram Mail,Mail,MAS,TVC,Mon Tue Wed Thu Fri Sat Sun
+12176,Thiruvananthapuram Chennai Mail,Mail,TVC,MAS,Mon Tue Wed Thu Fri Sat Sun
+26001,Chennai Madurai Vande Bharat Express,Vande Bharat,MAS,MDU,Mon Tue Wed Fri Sat Sun
+26002,Madurai Chennai Vande Bharat Express,Vande Bharat,MDU,MAS,Mon Tue Wed Thu Sat Sun
+22181,Chennai Madurai Tejas Express,Tejas,MAS,MDU,Tue Wed Thu Fri Sat Sun
+22182,Madurai Chennai Tejas Express,Tejas,MDU,MAS,Mon Wed Thu Fri Sat Sun
+20863,Mumbai Margao Vande Bharat Express,Vande Bharat,CSMT,MAO,Mon Wed Thu Fri Sat Sun
+20864,Margao Mumbai Vande Bharat Express,Vande Bharat,MAO,CSMT,Mon Tue Thu Fri Sat Sun
+12145,Amritsar Mumbai Mail,Mail,ASR,BCT,Mon Tue Wed Thu Fri Sat Sun
+12146,Mumbai Amritsar Mail,Mail,BCT,ASR,Mon Tue Wed Thu Fri Sat Sun
+22403,Mumbai Thiruvananthapuram Superfast Express,Superfast,CSMT,TVC,Mon Tue Wed Thu Fri Sat Sun
+22404,Thiruvananthapuram Mumbai Superfast Express,Superfast,TVC,CSMT,Mon Tue Wed Thu Fri Sat Sun
+12029,New Delhi Amritsar Shatabdi Express,Shatabdi,NDLS,ASR,Mon Tue Wed Thu Sat Sun
+12030,Amritsar New Delhi Shatabdi Express,Shatabdi,ASR,NDLS,Mon Tue Wed Thu Fri Sun
+20521,New Delhi Jammu Rajdhani Express,Rajdhani,NDLS,JAT,Mon Tue Wed Thu Fri Sat Sun
+20522,Jammu New Delhi Rajdhani Express,Rajdhani,JAT,NDLS,Mon Tue Wed Thu Fri Sat Sun
+12019,New Delhi Dehradun Shatabdi Express,Shatabdi,NDLS,DDN,Mon Tue Wed Thu Fri Sat Sun
+12020,Dehradun New Delhi Shatabdi Express,Shatabdi,DDN,NDLS,Mon Tue Wed Thu Fri Sat Sun
+12037,New Delhi Chandigarh Shatabdi Express,Shatabdi,NDLS,CDG,Mon Tue Wed Thu Fri Sat Sun
+12038,Chandigarh New Delhi Shatabdi Express,Shatabdi,CDG,NDLS,Mon Tue Wed Thu Fri Sat Sun
+26095,New Delhi Chandigarh Vande Bharat Express,Vande Bharat,NDLS,CDG,Mon Tue Wed Thu Sat Sun
+26096,Chandigarh New Delhi Vande Bharat Express,Vande Bharat,CDG,NDLS,Mon Tue Wed Thu Fri Sun
+12015,New Delhi Ajmer Shatabdi Express,Shatabdi,NDLS,AII,Mon Tue Wed Thu Fri Sat Sun
+12016,Ajmer New Delhi Shatabdi Express,Shatabdi,AII,NDLS,Mon Tue Wed Thu Fri Sat Sun
+11351,Jammu Pune Express,Express,JAT,PUNE,Tue Sat
+11352,Pune Jammu Express,Express,PUNE,JAT,Tue Fri
+12039,New Delhi Lucknow Shatabdi Express,Shatabdi,NDLS,LKO,Tue Wed Thu Fri Sat Sun
+12040,Lucknow New Delhi Shatabdi Express,Shatabdi,LKO,NDLS,Mon Wed Thu Fri Sat Sun
+22121,New Delhi Lucknow Tejas Express,Tejas,NDLS,LKO,Mon Tue Thu Fri Sun
+22122,Lucknow New Delhi Tejas Express,Tejas,LKO,NDLS,Mon Tue Wed Fri Sat
+26033,New Delhi Varanasi Vande Bharat Express,Vande Bharat,NDLS,BSB,Mon Tue Thu Fri Sat Sun
+26034,Varanasi New Delhi Vande Bharat Express,Vande Bharat,BSB,NDLS,Mon Tue Wed Fri Sat Sun
+12447,New Delhi Guwahati Rajdhani Express,Rajdhani,NDLS,GHY,Mon Tue Wed Thu Fri Sat Sun
+12448,Guwahati New Delhi Rajdhani Express,Rajdhani,GHY,NDLS,Mon Tue Wed Thu Fri Sat Sun
+17805,New Delhi Guwahati Express,Express,NDLS,GHY,Mon Tue Wed Thu Fri Sat Sun
+17806,Guwahati New Delhi Express,Express,GHY,NDLS,Mon Tue Wed Thu Fri Sat Sun
+12053,Howrah Patna Jan Shatabdi Express,Jan Shatabdi,HWH,PNBE,Mon Tue Wed Thu Fri Sat Sun
+12054,Patna Howrah Jan Shatabdi Express,Jan Shatabdi,PNBE,HWH,Mon Tue Wed Thu Fri Sat Sun
+19351,Chennai Secunderabad Express,Express,MAS,SC,Tue Fri Sun
+19352,Secunderabad Chennai Express,Express,SC,MAS,Mon Wed Sat
+20901,Howrah Puri Vande Bharat Express,Vande Bharat,HWH,PURI,Mon Tue Wed Thu Sat Sun
+20902,Puri Howrah Vande Bharat Express,Vande Bharat,PURI,HWH,Mon Tue Wed Thu Fri Sun
+22635,Howrah Puri Superfast Express,Superfast,HWH,PURI,Mon Tue Thu Fri Sun
+22636,Puri Howrah Superfast Express,Superfast,PURI,HWH,Mon Tue Wed Fri Sat
+12023,Ahmedabad Mumbai Shatabdi Express,Shatabdi,ADI,BCT,Mon Tue Wed Thu Fri Sat Sun
+12024,Mumbai Ahmedabad Shatabdi Express,Shatabdi,BCT,ADI,Mon Tue Wed Thu Fri Sat Sun
+20731,Ahmedabad Mumbai Vande Bharat Express,Vande Bharat,ADI,BCT,Mon Tue Wed Fri Sat Sun
+20732,Mumbai Ahmedabad Vande Bharat Express,Vande Bharat,BCT,ADI,Mon Tue Wed Thu Sat Sun
+22823,Rajkot Mumbai Superfast Express,Superfast,RJT,BCT,Mon Wed Thu Sat Sun
+22824,Mumbai Rajkot Superfast Express,Superfast,BCT,RJT,Mon Tue Wed Fri Sat
+22921,Ahmedabad Delhi Superfast Express,Superfast,ADI,DLI,Mon Tue Wed Thu Fri Sat Sun
+22922,Delhi Ahmedabad Superfast Express,Superfast,DLI,ADI,Mon Tue Wed Thu Fri Sat Sun
+12025,Pune Secunderabad Shatabdi Express,Shatabdi,PUNE,SC,Mon Wed Thu Fri Sat Sun
+12026,Secunderabad Pune Shatabdi Express,Shatabdi,SC,PUNE,Mon Tue Thu Fri Sat Sun
+11335,Secunderabad Bengaluru Express,Express,SC,SBC,Wed Sat
+11336,Bengaluru Secunderabad Express,Express,SBC,SC,Thu Sun
+20713,Secunderabad Visakhapatnam Vande Bharat Express,Vande Bharat,SC,VSKP,Mon Tue Wed Thu Fri Sat
+20714,Visakhapatnam Secunderabad Vande Bharat Express,Vande Bharat,VSKP,SC,Tue Wed Thu Fri Sat Sun
+22269,Secunderabad Visakhapatnam Garib Rath Express,Garib Rath,SC,VSKP,Mon Wed Sat
+22270,Visakhapatnam Secunderabad Garib Rath Express,Garib Rath,VSKP,SC,Mon Wed Fri
+22345,Bengaluru Kochi Intercity Express,Intercity,SBC,ERS,Mon Tue Wed Thu Fri Sat Sun
+22346,Kochi Bengaluru Intercity Express,Intercity,ERS,SBC,Mon Tue Wed Thu Fri Sat Sun
+11417,Indore Delhi Express,Express,INDB,NZM,Tue Sat
+11418,Delhi Indore Express,Express,NZM,INDB,Mon Thu
+12293,Nagpur Pune Garib Rath Express,Garib Rath,NGP,PUNE,Thu Sun
+12294,Pune Nagpur Garib Rath Express,Garib Rath,PUNE,NGP,Tue Sat
+12409,Bhubaneswar New Delhi Rajdhani Express,Rajdhani,BBS,NDLS,Mon Tue Wed Thu Fri Sat Sun
+12410,New Delhi Bhubaneswar Rajdhani Express,Rajdhani,NDLS,BBS,Mon Tue Wed Thu Fri Sat Sun
+12689,Guwahati Howrah Superfast Express,Superfast,GHY,HWH,Mon Tue Wed Thu Fri Sat Sun
+12690,Howrah Guwahati Superfast Express,Superfast,HWH,GHY,Mon Tue Wed Thu Fri Sat Sun
+12721,Jaipur Mumbai Superfast Express,Superfast,JP,BCT,Mon Tue Wed Thu Fri Sat Sun
+12722,Mumbai Jaipur Superfast Express,Superfast,BCT,JP,Mon Tue Wed Thu Fri Sat Sun
+22665,Thiruvananthapuram New Delhi Superfast Express,Superfast,TVC,NDLS,Mon Wed Fri
+22666,New Delhi Thiruvananthapuram Superfast Express,Superfast,NDLS,TVC,Mon Thu Sat
+12105,Howrah Mumbai Mail,Mail,HWH,CSMT,Mon Tue Wed Thu Fri Sat Sun
+12106,Mumbai Howrah Mail,Mail,CSMT,HWH,Mon Tue Wed Thu Fri Sat Sun
+11919,Gorakhpur Mumbai Express,Express,GKP,CSMT,Mon Tue Wed Thu Fri Sat Sun
+11920,Mumbai Gorakhpur Express,Express,CSMT,GKP,Mon Tue Wed Thu Fri Sat Sun

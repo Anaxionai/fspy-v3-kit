@@ -1,0 +1,13 @@
+# Kept out of the API, WebSocket server and simulator images, which build from tiffintrack/.
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+.env
+web
+k8s
+helm
+observability
+scripts
+tests
+docs

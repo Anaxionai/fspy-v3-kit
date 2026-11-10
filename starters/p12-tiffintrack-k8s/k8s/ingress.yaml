@@ -1,0 +1,22 @@
+# One address for the whole product (task 9): Traefik sends each path to a Service.
+# Until task 9 this file holds only comments, so kubectl apply -f k8s/ skips it.
+# TODO(task 9): select every line from "# apiVersion" to the end, press Ctrl+/ in VS Code to
+#   uncomment them, then fill in every TODO.
+#
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: tiffintrack
+# spec:
+#   ingressClassName: # TODO(task 9): the ingress controller that k3d runs
+#   rules:
+#     - http:
+#         paths:
+#           # TODO(task 9): one entry like the one below for each path: /orders, /riders, /ws and /.
+#           - path: # TODO(task 9): the path
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: # TODO(task 9): the Service for this path
+#                 port:
+#                   number: # TODO(task 9): that Service's port

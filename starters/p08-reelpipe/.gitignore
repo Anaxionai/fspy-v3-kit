@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Your own settings: commit .env.example instead
+.env
+
+# Build output: function.zip (task 18), the web app's packages and build
+*.zip
+web/node_modules/
+web/dist/

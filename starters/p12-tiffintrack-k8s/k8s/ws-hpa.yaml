@@ -1,0 +1,23 @@
+# The autoscaler for the WebSocket server (task 22).
+# Until task 22 this file holds only comments, so kubectl apply -f k8s/ skips it.
+# TODO(task 22): select every line from "# apiVersion" to the end, press Ctrl+/ in VS Code to
+#   uncomment them, then fill in every TODO.
+#
+# apiVersion: autoscaling/v2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: ws
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: # TODO(task 22): the Deployment to scale
+#   minReplicas: # TODO(task 22): the fewest pods
+#   maxReplicas: # TODO(task 22): the most pods
+#   metrics:
+#     - type: Resource
+#       resource:
+#         name: cpu
+#         target:
+#           type: Utilization
+#           averageUtilization: # TODO(task 22): the average CPU use to aim for, as a percentage of the request

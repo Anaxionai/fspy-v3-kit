@@ -1,0 +1,13 @@
+/*
+  All of Match Centre's styles go in this file. mockup.html links it, and
+  src/main.tsx imports it for the React app.
+
+  TODO(task 10): write the phone layout first, then the wider one:
+  - the header as a flexbox row that may wrap;
+  - main as a grid with one column (the phone layout);
+  - from a min-width media query (768px in the brief), two columns: Scorecard
+    on the left, Commentary on the right, Run rate under Scorecard;
+  - table wrappers that scroll sideways on a narrow screen;
+  - digits of the score that keep the same width as they change.
+  TODO(task 15): fix the contrast and focus findings from Lighthouse here.
+*/

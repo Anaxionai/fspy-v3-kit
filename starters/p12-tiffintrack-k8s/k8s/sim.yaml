@@ -1,0 +1,21 @@
+# The rider simulator, TiffinTrack's worker: a Deployment with no Service, because nothing calls it.
+# Fill in every TODO(task 8), then: kubectl apply -f k8s/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sim
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # TODO(task 8): the label that picks this Deployment's pods
+  template:
+    metadata:
+      labels: # TODO(task 8): the same label
+    spec:
+      containers:
+        - name: sim
+          image: # TODO(task 8): your simulator image and its version tag
+          args: # TODO(task 8): 50 riders, a point every 2 seconds, and a --seconds long enough for a whole day
+          env: # TODO(task 8): API_URL, with the API's Service name as the host name
+          # TODO(task 10): replace env with envFrom the ConfigMap tiffintrack-config.
+          # TODO(task 22): resources: CPU and memory requests and limits.

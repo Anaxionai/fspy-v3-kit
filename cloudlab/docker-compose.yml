@@ -1,0 +1,179 @@
+# FSPY-V3 cloud lab: local stand-ins for the databases and clouds the course uses.
+#
+# Start one profile at a time (two at most on an 8 GB laptop):
+#   docker compose --profile core up -d
+# Stop it:
+#   docker compose --profile core down
+# Stop it and delete its data:
+#   docker compose --profile core down -v
+#
+# Profiles: core, aws, azure, gcp, mongo, drill. README.md has the ports and passwords.
+
+name: cloudlab
+
+services:
+  # ---------------------------------------------------------------- core ---
+
+  # PostgreSQL 16 with the pgvector extension installed (you enable it per database).
+  postgres:
+    image: pgvector/pgvector:0.8.7-pg16
+    profiles: ["core"]
+    environment:
+      POSTGRES_USER: railseat
+      POSTGRES_PASSWORD: railseat
+      POSTGRES_DB: railseat
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U railseat -d railseat"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  # Redis 7: cache, rate limits, Celery broker and pub/sub.
+  redis:
+    image: redis:7.4.12-alpine
+    profiles: ["core"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  # Mailpit: catches every email your app sends (SMTP 1025); read them at http://localhost:8025.
+  mailpit:
+    image: axllent/mailpit:v1.33.1
+    profiles: ["core"]
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "1"      # accept any SMTP user name and password
+      MP_SMTP_AUTH_ALLOW_INSECURE: "1"  # allow that login without TLS (local only)
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  # ----------------------------------------------------------------- aws ---
+
+  # Floci: a local AWS (S3, SQS, Lambda, IAM, Budgets and more) on http://localhost:4566.
+  floci:
+    image: floci/floci:2.4.0
+    profiles: ["aws"]
+    environment:
+      FLOCI_DEFAULT_REGION: ap-south-1
+      FLOCI_STORAGE_MODE: hybrid                               # keep buckets and queues across restarts
+      FLOCI_SERVICES_LAMBDA_WARM_POOL_MAX_TOTAL: "2"           # at most 2 idle Lambda containers (saves RAM)
+      FLOCI_SERVICES_LAMBDA_CONTAINER_IDLE_TIMEOUT_SECONDS: "120"
+    ports:
+      - "4566:4566"
+    volumes:
+      - floci-data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock   # Lambda runs each function in its own container
+
+  # --------------------------------------------------------------- azure ---
+
+  # Azurite: Azure Blob (10000), Queue (10001) and Table (10002) storage.
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite:3.37.0
+    profiles: ["azure"]
+    command:
+      - azurite
+      - --blobHost=0.0.0.0
+      - --queueHost=0.0.0.0
+      - --tableHost=0.0.0.0
+      - --location=/data
+      - --skipApiVersionCheck   # accept requests from newer Azure SDK versions
+      - --loose                 # ignore headers that Azurite does not support
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    volumes:
+      - azurite-data:/data
+
+  # ----------------------------------------------------------------- gcp ---
+
+  # fake-gcs-server: the Google Cloud Storage JSON API on http://localhost:4443.
+  gcs:
+    image: fsouza/fake-gcs-server:1.56.1
+    profiles: ["gcp"]
+    # -public-host: signed-URL uploads only match this host. -external-url: the address in upload links.
+    command: ["-scheme", "http", "-port", "4443", "-public-host", "localhost:4443", "-external-url", "http://localhost:4443"]
+    ports:
+      - "4443:4443"
+    volumes:
+      - gcs-data:/storage
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:4443/storage/v1/b"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+
+  # Pub/Sub emulator from the Google Cloud CLI image, on port 8085.
+  pubsub:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:592.0.0-emulators
+    profiles: ["gcp"]
+    command:
+      - gcloud
+      - beta
+      - emulators
+      - pubsub
+      - start
+      - --project=fspy-local
+      - --host-port=0.0.0.0:8085
+    ports:
+      - "8085:8085"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8085"]
+      interval: 10s
+      timeout: 3s
+      retries: 12
+
+  # --------------------------------------------------------------- mongo ---
+
+  # MongoDB 7 for TiffinTrack. The cache is capped at 0.25 GB to save RAM.
+  mongo:
+    image: mongo:7.0.45
+    profiles: ["mongo"]
+    command: ["mongod", "--wiredTigerCacheSizeGB", "0.25"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  # --------------------------------------------------------------- drill ---
+
+  # Toxiproxy: puts faults (delay, cut, slow network) between your app and the core databases.
+  # API on 8474; proxies from toxiproxy.json: localhost:15432 -> postgres, localhost:16379 -> redis.
+  toxiproxy:
+    image: ghcr.io/shopify/toxiproxy:2.13.0
+    profiles: ["drill"]
+    command: ["-host=0.0.0.0", "-config=/config/toxiproxy.json"]
+    ports:
+      - "8474:8474"
+      - "15432:15432"
+      - "16379:16379"
+    volumes:
+      - ./toxiproxy.json:/config/toxiproxy.json:ro
+    healthcheck:
+      test: ["CMD", "/toxiproxy-cli", "list"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+
+volumes:
+  postgres-data:
+  redis-data:
+  floci-data:
+  azurite-data:
+  gcs-data:
+  mongo-data:

@@ -1,0 +1,37 @@
+# TiffinTrack's WebSocket server: a Deployment and a Service.
+# Fill in every TODO(task 8), then: kubectl apply -f k8s/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ws
+spec:
+  replicas: # TODO(task 8): how many WebSocket pods run
+  # TODO(task 22): remove replicas: from then on the autoscaler in ws-hpa.yaml decides it.
+  selector:
+    matchLabels: # TODO(task 8): the label that picks this Deployment's pods
+  template:
+    metadata:
+      labels: # TODO(task 8): the same label
+    spec:
+      containers:
+        - name: ws
+          image: # TODO(task 8): your WebSocket server image and its version tag
+          ports:
+            - containerPort: # TODO(task 8): the port the WebSocket server listens on
+          env: # TODO(task 8): REDIS_URL and API_URL, with Service names as host names
+          # TODO(task 10): replace env with envFrom the ConfigMap tiffintrack-config.
+          # TODO(task 21): a readinessProbe and a livenessProbe that open a TCP connection to the port.
+          #   If the liveness probe kills the pod before it starts listening, give it an initialDelaySeconds.
+          # TODO(task 22): resources: CPU and memory requests and limits.
+          #   Without a CPU request, the autoscaler cannot work out a percentage.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ws
+spec:
+  type: ClusterIP
+  selector: # TODO(task 8): the WebSocket pods' label
+  ports:
+    - port: # TODO(task 8): the port other pods call
+      targetPort: # TODO(task 8): the container's port

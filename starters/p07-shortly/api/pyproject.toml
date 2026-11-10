@@ -1,0 +1,24 @@
+[project]
+name = "shortly-api"
+version = "0.1.0"
+description = "Shortly, the course's URL shortener: the API and the click worker."
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.20.1",
+    "celery[redis]>=5.7.0",
+    "fastapi[standard]>=0.162.3",
+    "psycopg[binary]>=3.3.8",
+    "pydantic-settings>=2.16.2",
+    "redis>=8.1.0",
+    "sqlalchemy[asyncio]>=2.1.8",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+# "." finds the `app` package, ".." finds `worker` (shortly/worker/tasks.py).
+pythonpath = [".", ".."]
+testpaths = ["tests"]
