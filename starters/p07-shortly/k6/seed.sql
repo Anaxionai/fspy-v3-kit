@@ -1,0 +1,7 @@
+-- Test links for the k6 load test (task 20).
+-- Load it from shortly/:
+--   docker compose exec -T postgres psql -U shortly -d shortly < k6/seed.sql
+--
+-- TODO(task 20): insert 1,000 links with the codes t000001 to t001000, using
+--   generate_series(1, 1000) and lpad. Add ON CONFLICT (code) DO NOTHING,
+--   so you can run the file again safely.

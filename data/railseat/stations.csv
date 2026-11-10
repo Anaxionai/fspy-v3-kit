@@ -1,0 +1,63 @@
+code,name,city,state,zone,latitude,longitude
+NDLS,New Delhi,New Delhi,Delhi,NR,28.6428,77.2191
+DLI,Delhi Junction,Delhi,Delhi,NR,28.6610,77.2277
+NZM,Hazrat Nizamuddin,Delhi,Delhi,NR,28.5892,77.2542
+CDG,Chandigarh Junction,Chandigarh,Chandigarh,NR,30.7030,76.8220
+UMB,Ambala Cantonment Junction,Ambala,Haryana,NR,30.3382,76.8287
+LDH,Ludhiana Junction,Ludhiana,Punjab,NR,30.9120,75.8480
+ASR,Amritsar Junction,Amritsar,Punjab,NR,31.6328,74.8672
+JAT,Jammu Tawi,Jammu,Jammu and Kashmir,NR,32.7063,74.8802
+DDN,Dehradun,Dehradun,Uttarakhand,NR,30.3139,78.0336
+JP,Jaipur Junction,Jaipur,Rajasthan,NWR,26.9208,75.7866
+AII,Ajmer Junction,Ajmer,Rajasthan,NWR,26.4561,74.6377
+KOTA,Kota Junction,Kota,Rajasthan,WCR,25.2231,75.8810
+AGC,Agra Cantonment,Agra,Uttar Pradesh,NCR,27.1589,77.9906
+GWL,Gwalior Junction,Gwalior,Madhya Pradesh,NCR,26.2161,78.1819
+VGLJ,Virangana Lakshmibai Jhansi Junction,Jhansi,Uttar Pradesh,NCR,25.4439,78.5534
+CNB,Kanpur Central,Kanpur,Uttar Pradesh,NCR,26.4539,80.3512
+LKO,Lucknow Charbagh,Lucknow,Uttar Pradesh,NR,26.8320,80.9190
+PRYJ,Prayagraj Junction,Prayagraj,Uttar Pradesh,NCR,25.4460,81.8289
+BSB,Varanasi Junction,Varanasi,Uttar Pradesh,NR,25.3269,82.9864
+GKP,Gorakhpur Junction,Gorakhpur,Uttar Pradesh,NER,26.7598,83.3818
+DDU,Pt. Deen Dayal Upadhyaya Junction,Chandauli,Uttar Pradesh,ECR,25.2767,83.1173
+PNBE,Patna Junction,Patna,Bihar,ECR,25.6028,85.1375
+DHN,Dhanbad Junction,Dhanbad,Jharkhand,ECR,23.7922,86.4283
+ASN,Asansol Junction,Asansol,West Bengal,ER,23.6913,86.9748
+HWH,Howrah Junction,Howrah,West Bengal,ER,22.5829,88.3428
+KGP,Kharagpur Junction,Kharagpur,West Bengal,SER,22.3399,87.3250
+TATA,Tatanagar Junction,Jamshedpur,Jharkhand,SER,22.7684,86.2000
+BBS,Bhubaneswar,Bhubaneswar,Odisha,ECoR,20.2656,85.8431
+PURI,Puri,Puri,Odisha,ECoR,19.8097,85.8404
+NJP,New Jalpaiguri Junction,Siliguri,West Bengal,NFR,26.6825,88.4439
+GHY,Guwahati,Guwahati,Assam,NFR,26.1821,91.7504
+CSMT,Mumbai Chhatrapati Shivaji Maharaj Terminus,Mumbai,Maharashtra,CR,18.9399,72.8354
+BCT,Mumbai Central,Mumbai,Maharashtra,WR,18.9697,72.8194
+PUNE,Pune Junction,Pune,Maharashtra,CR,18.5289,73.8743
+NGP,Nagpur Junction,Nagpur,Maharashtra,CR,21.1534,79.0889
+BSL,Bhusaval Junction,Bhusawal,Maharashtra,CR,21.0469,75.7880
+SUR,Solapur,Solapur,Maharashtra,CR,17.6640,75.8930
+ADI,Ahmedabad Junction,Ahmedabad,Gujarat,WR,23.0263,72.6019
+BRC,Vadodara Junction,Vadodara,Gujarat,WR,22.3108,73.1809
+ST,Surat,Surat,Gujarat,WR,21.2055,72.8410
+RJT,Rajkot Junction,Rajkot,Gujarat,WR,22.3116,70.8028
+BPL,Bhopal Junction,Bhopal,Madhya Pradesh,WCR,23.2672,77.4130
+ET,Itarsi Junction,Itarsi,Madhya Pradesh,WCR,22.6080,77.7670
+JBP,Jabalpur Junction,Jabalpur,Madhya Pradesh,WCR,23.1647,79.9511
+INDB,Indore Junction,Indore,Madhya Pradesh,WR,22.7167,75.8678
+R,Raipur Junction,Raipur,Chhattisgarh,SECR,21.2564,81.6298
+MAO,Madgaon Junction,Margao,Goa,KR,15.2677,73.9711
+MAS,Chennai Central,Chennai,Tamil Nadu,SR,13.0825,80.2750
+KPD,Katpadi Junction,Vellore,Tamil Nadu,SR,12.9722,79.1383
+SA,Salem Junction,Salem,Tamil Nadu,SR,11.6714,78.1132
+CBE,Coimbatore Junction,Coimbatore,Tamil Nadu,SR,10.9964,76.9672
+TPJ,Tiruchchirappalli Junction,Tiruchirappalli,Tamil Nadu,SR,10.7942,78.6854
+MDU,Madurai Junction,Madurai,Tamil Nadu,SR,9.9200,78.1103
+ERS,Ernakulam Junction,Kochi,Kerala,SR,9.9689,76.2916
+TVC,Thiruvananthapuram Central,Thiruvananthapuram,Kerala,SR,8.4874,76.9520
+SBC,KSR Bengaluru City Junction,Bengaluru,Karnataka,SWR,12.9783,77.5694
+MYS,Mysuru Junction,Mysuru,Karnataka,SWR,12.3163,76.6454
+UBL,SSS Hubballi Junction,Hubballi,Karnataka,SWR,15.3500,75.1491
+SC,Secunderabad Junction,Secunderabad,Telangana,SCR,17.4337,78.5016
+BZA,Vijayawada Junction,Vijayawada,Andhra Pradesh,SCoR,16.5184,80.6195
+GTL,Guntakal Junction,Guntakal,Andhra Pradesh,SCoR,15.1750,77.3670
+VSKP,Visakhapatnam Junction,Visakhapatnam,Andhra Pradesh,SCoR,17.7221,83.2897

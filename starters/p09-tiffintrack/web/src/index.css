@@ -1,0 +1,19 @@
+/* A few plain styles. Change them as you like. */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+main {
+  padding: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.25rem 0.75rem;
+  text-align: right;
+}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Pay {{ order.amount_paise | inr }} · MockPay{% endblock %}
+{% block nav %}{% endblock %}
+{% block main_class %}narrow{% endblock %}
+{% block style %}
+    .amount { font-size: 2.4rem; font-weight: 700; margin: 0.1rem 0 0.4rem; font-variant-numeric: tabular-nums; }
+    .pay-buttons { display: grid; gap: 0.6rem; margin: 1.25rem 0 0.5rem; }
+    .btn {
+      display: block; width: 100%; padding: 0.75rem 1rem; border-radius: 10px;
+      border: 1px solid transparent; font: inherit; font-weight: 600; text-align: left; cursor: pointer;
+    }
+    .btn small { display: block; font-weight: 400; font-size: 0.8rem; margin-top: 0.1rem; }
+    .btn.good { background: var(--good); color: #fff; }
+    .btn.bad { background: var(--card); color: var(--bad); border-color: #efc2be; }
+    .btn.waiting { background: var(--card); color: var(--wait); border-color: #e9d397; }
+    .btn:hover { filter: brightness(0.95); }
+    .btn:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+    .notice { padding: 0.75rem 1rem; border-radius: 10px; background: var(--good-bg); color: var(--good); }
+    .tries { list-style: none; padding: 0; margin: 0.4rem 0 0; font-size: 0.85rem; }
+    .tries li { padding: 0.3rem 0; border-top: 1px solid var(--line); }
+{% endblock %}
+{% block content %}
+<div class="card">
+  <p class="muted small" style="margin:0">Pay for receipt <code>{{ order.receipt }}</code></p>
+  <p class="amount">{{ order.amount_paise | inr }}</p>
+  <p class="muted small" style="margin:0">
+    Order <code>{{ order.id }}</code>
+    <span class="pill {{ tone(order.status) }}">{{ order.status }}</span>
+  </p>
+
+  {% if order.status == "paid" %}
+    <p class="notice">This order is already paid. There is nothing more to pay.</p>
+    {% if order.return_url %}<p><a href="{{ order.return_url }}">Back to the shop</a></p>{% endif %}
+  {% else %}
+    <form class="pay-buttons" method="post" action="/checkout/{{ order.id }}/pay">
+      <button class="btn good" name="outcome" value="succeed">Pay with UPI (succeeds)
+        <small>The payment is captured. MockPay sends payment.captured.</small></button>
+      <button class="btn bad" name="outcome" value="decline">Pay (bank declines)
+        <small>The payment fails. MockPay sends payment.failed, reason bank_declined.</small></button>
+      <button class="btn waiting" name="outcome" value="timeout">Pay (times out)
+        <small>The bank never answers. After {{ "%g" | format(timeout_seconds) }} s MockPay sends
+          payment.failed, reason timeout.</small></button>
+    </form>
+  {% endif %}
+
+  {% if payments %}
+    <p class="muted small" style="margin:1.25rem 0 0">Earlier tries for this order</p>
+    <ul class="tries">
+      {% for payment in payments %}
+        <li><code>{{ payment.id }}</code>
+          <span class="pill {{ tone(payment.status) }}">{{ payment.status }}</span>
+          {% if payment.reason %}<span class="muted">{{ payment.reason }}</span>{% endif %}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+<p class="muted small">This is a practice page. No money moves, and there is nothing to type.</p>
+{% endblock %}

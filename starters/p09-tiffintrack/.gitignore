@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Web app
+node_modules/
+dist/
+
+# Real settings stay on your laptop. Commit .env.example instead.
+.env

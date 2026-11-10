@@ -1,0 +1,42 @@
+# TiffinTrack's API: a Deployment that keeps the API pods running, and a Service that gives
+# them one address inside the cluster. Fill in every TODO(task 8), then: kubectl apply -f k8s/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  # TODO(task 23): the annotation kubernetes.io/change-cause, naming the version you ship.
+spec:
+  replicas: # TODO(task 8): how many API pods run
+  # TODO(task 23): a RollingUpdate strategy that starts one extra pod and never takes a ready
+  #   pod away first (strategy.rollingUpdate: maxSurge and maxUnavailable).
+  selector:
+    matchLabels: # TODO(task 8): the label that picks this Deployment's pods
+  template:
+    metadata:
+      labels: # TODO(task 8): the same label, so the selector and the Service find these pods
+      # TODO(task 25): in the Helm chart's copy of this file, annotations that ask Prometheus
+      #   to scrape these pods: prometheus.io/scrape, prometheus.io/port and prometheus.io/path.
+    spec:
+      containers:
+        - name: api
+          image: # TODO(task 8): your API image and its version tag, as imported with k3d image import
+          ports:
+            - containerPort: # TODO(task 8): the port the API listens on
+          env: # TODO(task 8): MONGO_URL and REDIS_URL, with Service names as host names, never localhost
+          # TODO(task 10): replace env with envFrom the ConfigMap tiffintrack-config, and take
+          #   MONGO_URL from the Secret tiffintrack-secrets with secretKeyRef.
+          # TODO(task 21): a startupProbe and a livenessProbe on /healthz, and a readinessProbe on /readyz.
+          # TODO(task 22): resources: CPU and memory requests and limits.
+          # TODO(task 23): lifecycle.preStop: wait a few seconds before the container stops,
+          #   so the Service stops sending it requests first.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+spec:
+  type: ClusterIP
+  selector: # TODO(task 8): the API pods' label
+  ports:
+    - port: # TODO(task 8): the port other pods call
+      targetPort: # TODO(task 8): the container's port

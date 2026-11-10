@@ -1,0 +1,19 @@
+# Check out every text file with LF line endings, on Windows too.
+# Shell scripts, Dockerfiles and data files then work in Git Bash and inside Linux containers.
+* text=auto eol=lf
+
+# Files that are not text: Git must never change their bytes.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.mp3 binary
+*.mp4 binary

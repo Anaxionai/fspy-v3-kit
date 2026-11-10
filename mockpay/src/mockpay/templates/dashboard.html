@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% block head %}{% if refresh %}<meta http-equiv="refresh" content="{{ refresh }}">{% endif %}{% endblock %}
+{% block title %}Dashboard · MockPay{% endblock %}
+{% block style %}
+    section { margin-top: 1.75rem; }
+    .jump { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-size: 0.88rem; margin-top: 0.75rem; }
+    .settings { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.9rem 1.5rem; margin: 0; }
+    .settings dt { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+    .settings dd { margin: 0.1rem 0 0; overflow-wrap: anywhere; }
+    .table-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em;
+      color: var(--muted); font-weight: 600; background: var(--head);
+    }
+    tbody tr:last-child td { border-bottom: 0; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.wrap { white-space: normal; min-width: 16rem; }
+    .empty { margin: 0; padding: 0.9rem 0.75rem; color: var(--muted); font-size: 0.88rem; }
+    .send-again {
+      font: inherit; font-size: 0.8rem; padding: 0.15rem 0.55rem; cursor: pointer;
+      color: var(--brand); background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+    }
+{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<p class="muted small" style="margin:0">
+  A teaching aid: the latest orders, payments and refunds, and every webhook MockPay tried to send.
+  Times are IST.
+  {% if refresh %}The page reloads every {{ refresh }} s (<a href="/dashboard?refresh=0">stop</a>).
+  {% else %}<a href="/dashboard">Reload every 5 s</a>.{% endif %}
+</p>
+<nav class="jump" aria-label="Sections">
+  <a href="#attempts">Webhook attempts</a><a href="#events">Events</a><a href="#orders">Orders</a>
+  <a href="#payments">Payments</a><a href="#refunds">Refunds</a><a href="#settings">Settings</a>
+</nav>
+
+<section id="attempts">
+  <h2>Webhook attempts <span class="muted small">newest first</span></h2>
+  <div class="table-wrap">
+  {% if attempts %}
+    <table>
+      <thead><tr><th>Time</th><th>Event</th><th>Type</th><th>Copy</th><th class="num">Try</th>
+        <th>Answer</th><th class="num">Took</th></tr></thead>
+      <tbody>
+      {% for a in attempts %}
+        <tr>
+          <td class="mono">{{ a.attempted_at | when(ms=True) }}</td>
+          <td><code>{{ a.event_id }}</code></td>
+          <td>{{ a.type }}</td>
+          <td>{{ a.kind }}</td>
+          <td class="num">{{ a.attempt_no }}</td>
+          <td>{% if a.status_code is not none %}<span class="pill {{ tone(a.status_code) }}">{{ a.status_code }}</span>
+              {% else %}<span class="pill bad">no answer</span> <span class="muted">{{ a.error }}</span>{% endif %}</td>
+          <td class="num">{{ a.duration_ms }} ms</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">No webhook has been sent yet. Pay for an order on its checkout page.</p>
+  {% endif %}
+  </div>
+</section>
+
+{% if waiting %}
+<section id="waiting">
+  <h2>Waiting to be sent</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Event</th><th>Type</th><th>Copy</th><th class="num">Tries so far</th><th>Next try</th></tr></thead>
+      <tbody>
+      {% for d in waiting %}
+        <tr>
+          <td><code>{{ d.event_id }}</code></td><td>{{ d.type }}</td><td>{{ d.kind }}</td>
+          <td class="num">{{ d.attempts }}</td>
+          <td>{% if d.status == "sending" %}sending now{% else %}in {{ "%.1f" | format(d.due_in) }} s{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+
+<section id="events">
+  <h2>Events</h2>
+  <div class="table-wrap">
+  {% if events %}
+    <table>
+      <thead><tr><th>Event</th><th>Type</th><th>Order</th><th>Created</th><th class="num">Copies</th>
+        <th class="num">Delivered</th><th></th></tr></thead>
+      <tbody>
+      {% for e in events %}
+        <tr>
+          <td><code>{{ e.id }}</code></td><td>{{ e.type }}</td><td><code>{{ e.order_id }}</code></td>
+          <td class="mono">{{ e.created_at | when }}</td>
+          <td class="num">{{ e.copies }}</td><td class="num">{{ e.delivered }}</td>
+          <td><form method="post" action="/dashboard/events/{{ e.id }}/resend" style="margin:0">
+            <button class="send-again" title="Send this event again, now">Send again</button></form></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">No events yet.</p>
+  {% endif %}
+  </div>
+</section>
+
+<section id="orders">
+  <h2>Orders</h2>
+  <div class="table-wrap">
+  {% if orders %}
+    <table>
+      <thead><tr><th>Order</th><th>Receipt</th><th class="num">Amount</th><th>Status</th><th>Created</th><th></th></tr></thead>
+      <tbody>
+      {% for o in orders %}
+        <tr>
+          <td><code>{{ o.id }}</code></td><td>{{ o.receipt }}</td>
+          <td class="num">{{ o.amount_paise | inr }}</td>
+          <td><span class="pill {{ tone(o.status) }}">{{ o.status }}</span></td>
+          <td class="mono">{{ o.created_at | when }}</td>
+          <td><a href="/checkout/{{ o.id }}">checkout page</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">No orders yet. Create one with POST /v1/orders.</p>
+  {% endif %}
+  </div>
+</section>
+
+<section id="payments">
+  <h2>Payments</h2>
+  <div class="table-wrap">
+  {% if payments %}
+    <table>
+      <thead><tr><th>Payment</th><th>Order</th><th class="num">Amount</th><th>Status</th><th>Reason</th>
+        <th class="num">Refunded</th><th>Created</th></tr></thead>
+      <tbody>
+      {% for p in payments %}
+        <tr>
+          <td><code>{{ p.id }}</code></td><td><code>{{ p.order_id }}</code></td>
+          <td class="num">{{ p.amount_paise | inr }}</td>
+          <td><span class="pill {{ tone(p.status) }}">{{ p.status }}</span></td>
+          <td>{{ p.reason or "" }}</td>
+          <td class="num">{% if p.refunded_paise %}{{ p.refunded_paise | inr }}{% endif %}</td>
+          <td class="mono">{{ p.created_at | when }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">No payments yet.</p>
+  {% endif %}
+  </div>
+</section>
+
+<section id="refunds">
+  <h2>Refunds</h2>
+  <div class="table-wrap">
+  {% if refunds %}
+    <table>
+      <thead><tr><th>Refund</th><th>Payment</th><th>Order</th><th class="num">Amount</th><th>Status</th><th>Created</th></tr></thead>
+      <tbody>
+      {% for r in refunds %}
+        <tr>
+          <td><code>{{ r.id }}</code></td><td><code>{{ r.payment_id }}</code></td><td><code>{{ r.order_id }}</code></td>
+          <td class="num">{{ r.amount_paise | inr }}</td>
+          <td><span class="pill {{ tone(r.status) }}">{{ r.status }}</span></td>
+          <td class="mono">{{ r.created_at | when }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="empty">No refunds yet.</p>
+  {% endif %}
+  </div>
+</section>
+
+<section id="settings">
+  <h2>Settings</h2>
+  <div class="card">
+    <dl class="settings">
+      <div><dt>Webhook URL</dt><dd><code>{{ settings.webhook_url }}</code></dd></div>
+      <div><dt>Sent twice</dt><dd>{{ "%g" | format(settings.duplicate_rate * 100) }}% of webhooks</dd></div>
+      <div><dt>Delay</dt><dd>{{ "%g" | format(settings.delay_seconds) }} s, plus 0 to {{ "%g" | format(settings.late_max_seconds) }} s
+        for {{ "%g" | format(settings.late_rate * 100) }}% of webhooks</dd></div>
+      <div><dt>Retries after</dt><dd>{% for d in settings.retry_delays %}{{ "%g" | format(d) }} s{% if not loop.last %}, {% endif %}{% else %}no retries{% endfor %}</dd></div>
+      <div><dt>"Times out" fails after</dt><dd>{{ "%g" | format(settings.timeout_seconds) }} s</dd></div>
+      <div><dt>Webhook secret</dt><dd>{% if settings.webhook_secret == "mockpay_test_secret" %}the default test secret{% else %}your own MOCKPAY_WEBHOOK_SECRET{% endif %}</dd></div>
+    </dl>
+  </div>
+</section>
+{% endblock %}

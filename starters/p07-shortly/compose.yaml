@@ -1,0 +1,37 @@
+# Shortly's stack: docker compose up -d --build --wait
+#
+# The project name gives the container names shortly-api-1, shortly-postgres-1,
+# shortly-redis-1 and (task 19) shortly-worker-1. P11, P13 and the mentor's
+# incident drill rely on these names: keep the project name and the service names.
+#
+# An outline: write each TODO with the steps of tasks 9, 10 and 19.
+name: shortly
+
+services:
+  api:
+    build: .
+    # TODO(task 9): publish port 8080, and set DATABASE_URL so the API reaches the database
+    #   at host postgres (the service name), user, password and database shortly.
+    # TODO(task 9): a health check that requests /healthz with Python (the slim image has no curl).
+    #   The migration runs before uvicorn starts, so add `start_period: 30s`: failed checks in
+    #   those first 30 seconds then do not mark the API unhealthy.
+    # TODO(task 9): start only after postgres and redis are healthy (depends_on with a condition).
+    # TODO(task 10): replace DATABASE_URL with `env_file: .env`.
+
+  postgres:
+    # PostgreSQL 16: the same image as the cloud lab, so it is already on your laptop.
+    image: pgvector/pgvector:0.8.7-pg16
+    # TODO(task 9): POSTGRES_USER, POSTGRES_PASSWORD and POSTGRES_DB, all shortly.
+    # TODO(task 9): keep the data in the named volume pgdata, at /var/lib/postgresql/data.
+    # TODO(task 9): a health check with pg_isready.
+    # TODO(task 10): take the password from ${POSTGRES_PASSWORD}, so no password stays in this file.
+
+  redis:
+    # Redis 7: the same image as the cloud lab.
+    image: redis:7.4.12-alpine
+    # TODO(task 9): a health check with redis-cli ping.
+
+  # TODO(task 19): add the service worker: built from the same Dockerfile, env_file .env,
+  #   the command `celery -A worker.tasks worker --loglevel=INFO`, and the same depends_on as api.
+
+# TODO(task 9): declare the named volume pgdata here, under a top-level `volumes:` key.

@@ -1,0 +1,13 @@
+/* A few base styles. Add your own for the page in task 21. */
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  color: #1f2933;
+  background: #ffffff;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 48rem;
+  padding: 1.5rem;
+}

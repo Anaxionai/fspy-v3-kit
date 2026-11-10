@@ -1,0 +1,4 @@
+# Shell scripts run in Git Bash, and .env (a copy of .env.example) is read by Docker Compose.
+# Keep them in Unix (LF) line endings, even on Windows.
+*.sh text eol=lf
+.env.example text eol=lf

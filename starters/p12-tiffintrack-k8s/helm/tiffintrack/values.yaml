@@ -1,0 +1,5 @@
+# Settings for the tiffintrack chart (task 24). The templates read them as .Values.<name>,
+# for example .Values.api.image.tag.
+# TODO(task 24): add each service's image tag, api.replicas, each container's resources,
+#   the autoscaler's limits, config.logLevel and secretName. Never put a password here:
+#   the chart only names the Secret that you created with kubectl.

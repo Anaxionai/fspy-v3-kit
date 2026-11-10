@@ -1,0 +1,8 @@
+# Keep these out of the worker image (task 10): your Windows virtual environment,
+# the web app and its node_modules, your settings, and caches.
+.venv
+web
+.env
+**/__pycache__
+.pytest_cache
+*.zip

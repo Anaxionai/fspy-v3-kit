@@ -1,0 +1,3 @@
+# Files Docker must not send into the build.
+# TODO(task 8): add the four lines from step 1 of task 8: the virtual environments,
+#   the Python caches, the .env file and web/node_modules.

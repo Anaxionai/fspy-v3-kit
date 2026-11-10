@@ -1,0 +1,3 @@
+# Kept out of the web image: the build stage installs its own packages.
+node_modules
+dist

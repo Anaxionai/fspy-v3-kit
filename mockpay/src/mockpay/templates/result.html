@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block head %}{% if payment.status == "pending" %}<meta http-equiv="refresh" content="3">{% endif %}{% endblock %}
+{% block title %}Payment {{ payment.status }} · MockPay{% endblock %}
+{% block nav %}{% endblock %}
+{% block main_class %}narrow{% endblock %}
+{% block style %}
+    .amount { font-size: 2rem; font-weight: 700; margin: 0 0 0.4rem; font-variant-numeric: tabular-nums; }
+{% endblock %}
+{% block content %}
+<div class="card">
+  <p class="amount">{{ payment.amount_paise | inr }}</p>
+  <p>
+    <span class="pill {{ tone(payment.status) }}">{{ payment.status }}</span>
+    {% if payment.reason %}<span class="muted">{{ payment.reason }}</span>{% endif %}
+  </p>
+  {% if payment.status == "captured" %}
+    <p>The payment is captured. MockPay is sending the payment.captured webhook to the shop.</p>
+  {% elif payment.status == "failed" %}
+    <p>The payment failed. MockPay is sending the payment.failed webhook to the shop.
+      You can <a href="/checkout/{{ payment.order_id }}">try again</a>.</p>
+  {% else %}
+    <p>Waiting for the bank. About {{ "%g" | format(timeout_seconds) }} s after the button was pressed,
+      MockPay fails this payment and sends payment.failed with reason timeout.
+      This page reloads by itself.</p>
+  {% endif %}
+  <p class="muted small">Payment <code>{{ payment.id }}</code> for order <code>{{ payment.order_id }}</code>.
+    The order has no return_url, so MockPay shows this page instead of sending you back to the shop.</p>
+</div>
+{% endblock %}

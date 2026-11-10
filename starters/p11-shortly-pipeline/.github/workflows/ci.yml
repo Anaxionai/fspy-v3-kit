@@ -1,0 +1,87 @@
+# Shortly's pipeline (P11): a skeleton. You write every step.
+#
+# Keep two identical copies of this file:
+#   .github/workflows/shortly-ci.yml          at the repository root: GitHub and act run this one
+#   shortly/.github/workflows/ci.yml          in the task folder: AxReview reads this one
+# In every P11 task, point the paths and the working directory at that task's shortly/ folder.
+#
+# Each job ends with a step that fails on purpose ("TODO ... && exit 1"). Replace it with your
+# steps. A job with `if: false` is switched off until its task: then replace that line.
+name: shortly-ci
+
+on:
+  pull_request:
+    # TODO(task 9): a paths: filter with your shortly/ folder's path plus "/**",
+    #   and ".github/workflows/shortly-ci.yml".
+  push:
+    branches: [main]
+    # TODO(task 9): the same paths: filter as pull_request.
+  # TODO(task 14): add workflow_dispatch, with one input named tag: the image tag to deploy.
+
+defaults:
+  run:
+    # TODO(task 9): your shortly/ folder's path from the repository root. Step 1 of task 9 prints
+    #   it with `git rev-parse --show-prefix`. Every run step then starts in shortly/.
+    working-directory: CHANGE-ME/shortly
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    # TODO(task 9): services: for the tests, postgres and redis with the same images as the cloud lab,
+    #   each with a health check in `options:` and its port published on localhost (5432 and 6379).
+    # TODO(task 9): env: TEST_DATABASE_URL and TEST_REDIS_URL, pointing at those services on
+    #   localhost. tests/conftest.py from the P7 starter reads these two names.
+    steps:
+      - uses: actions/checkout@v7
+      # TODO(task 9): set up uv (the action version is in the kit's VERSIONS.md), then in api/:
+      #   install the locked dependencies, run ruff, run mypy on app, migrate the test database
+      #   (alembic upgrade head with DATABASE_URL set to the test database), and run pytest.
+      #   astral-sh/setup-uv has only full version tags, such as @v10.3.3: @v10 is "reference not found".
+      - run: echo "TODO(task 9) write the API checks" && exit 1
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # TODO(task 9): set up Node 24, then in web/: npm ci, npm run lint and npx tsc -b.
+      - run: echo "TODO(task 9) write the web checks" && exit 1
+
+  image:
+    if: false  # TODO(task 10): delete this line when you write the job.
+    runs-on: ubuntu-latest
+    # TODO(task 10): run only after the check jobs pass (needs:), with the permissions from step 2,
+    #   and the env: value IMAGE_OWNER from step 4.
+    steps:
+      - uses: actions/checkout@v7
+      # TODO(task 10): set VERSION (from api/pyproject.toml, with uv) and IMAGE (lower case) in
+      #   $GITHUB_ENV; log in to ghcr.io with GITHUB_TOKEN; build the image with two tags.
+      #   Under act, the login needs GITHUB_TOKEN in .secrets (task 10, Stuck?), on pull requests too.
+      # TODO(task 11): scan "$IMAGE:$VERSION" with Trivy, failing on fixable CRITICAL findings,
+      #   between the build and any push. Under act the build uses your laptop's cached base image:
+      #   run `docker pull python:3.12-slim` first, or an old copy fails the scan.
+      # TODO(task 10): on push events only, push the sha- tag, and the version tag only when
+      #   it is not in GHCR yet.
+      - run: echo "TODO(task 10) write the image steps" && exit 1
+
+  infra:
+    if: false  # TODO(task 13): replace this line with a condition: pull requests only.
+    runs-on: ubuntu-latest
+    # TODO(task 13): permissions from step 3, a service floci on 4566:4566 (image version in
+    #   VERSIONS.md), and env: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from the two secrets.
+    steps:
+      - uses: actions/checkout@v7
+      # TODO(task 13): set up OpenTofu (tofu_wrapper: false); run init, fmt -check, validate and
+      #   plan in infra/, saving the plan as plan.txt; post plan.txt on the pull request, in a step
+      #   that act skips (if: env.ACT != 'true').
+      - run: echo "TODO(task 13) write the infra steps" && exit 1
+
+  deploy-staging:
+    if: false  # TODO(task 14): replace this line: pushes to main and manual runs only.
+    runs-on: ubuntu-latest
+    # TODO(task 14): run after the image job (needs:), with the permissions from step 5.
+    steps:
+      - uses: actions/checkout@v7
+      # TODO(task 14): log in to GHCR, set IMAGE as in the image job, and set SHORTLY_IMAGE to the
+      #   tag input or the sha- tag; then .env from .env.example, compose pull, compose up -d
+      #   --no-build, and bash scripts/smoke.sh. On failure, print docker compose logs --tail 50.
+      - run: echo "TODO(task 14) write the deploy steps" && exit 1

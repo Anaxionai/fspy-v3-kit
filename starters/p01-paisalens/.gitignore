@@ -1,0 +1,7 @@
+# Made by uv and Python: never commit them.
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env

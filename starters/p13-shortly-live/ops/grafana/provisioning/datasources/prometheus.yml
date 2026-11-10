@@ -1,0 +1,9 @@
+# Grafana loads this at start-up, so Prometheus is already there as a data source (task 7, step 9).
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    uid: prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true

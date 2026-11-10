@@ -1,0 +1,9 @@
+-- Seats: every seat of one journey's train, with booked true or false.
+-- Test it in psql with a real journey id. In app/routers/trains.py the same
+-- query uses the bound parameter :journey_id instead.
+--
+-- TODO(task 10): write the query below this comment.
+--   - Select the SeatOut fields: seat_id, coach, travel_class, number and booked.
+--   - A seat is booked when a confirmed booking holds it on this journey.
+--     A cancelled booking does not count.
+--   - Order the seats by coach, then by number.

@@ -1,0 +1,6 @@
+# TiffinTrack's Helm chart (task 24). You write values.yaml and the templates/ folder.
+apiVersion: v2
+name: tiffintrack
+description: TiffinTrack, live food-delivery tracking for Pune.
+version: 0.1.0
+appVersion: "0.3.0"

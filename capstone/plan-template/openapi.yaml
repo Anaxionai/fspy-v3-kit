@@ -1,0 +1,279 @@
+# OpenAPI skeleton for your capstone API contract (CP1 task 9).
+# 1. Copy this file to capstone/openapi.yaml.
+# 2. Change the title and the description. Keep the sign-up and log-in paths from RailSeat (P5).
+# 3. Replace the example "items" resource with your own, one path for each story that needs the server.
+# 4. Check it: uvx openapi-spec-validator capstone/openapi.yaml   (the last line should end with OK)
+openapi: 3.1.0
+info:
+  title: Your product API
+  version: 0.1.0
+  description: Replace this line with one sentence about what your API does.
+servers:
+  - url: http://localhost:8000
+    description: The API running on your laptop
+tags:
+  - name: auth
+    description: Sign-up and log-in, reused from RailSeat (P5)
+  - name: items
+    description: The example resource. Replace it with your own.
+paths:
+  /auth/signup:
+    post:
+      tags: [auth]
+      operationId: signUp
+      summary: Create an account (S01)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpIn'
+      responses:
+        '201':
+          description: The account was created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserOut'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          $ref: '#/components/responses/Invalid'
+  /auth/login:
+    post:
+      tags: [auth]
+      operationId: logIn
+      summary: Log in and get an access token (S01)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginIn'
+      responses:
+        '200':
+          description: Signed in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenOut'
+        '401':
+          $ref: '#/components/responses/Unauthorised'
+        '422':
+          $ref: '#/components/responses/Invalid'
+  /items:
+    get:
+      tags: [items]
+      operationId: listItems
+      summary: List my items, newest first (S02)
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: One page of items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemPage'
+        '401':
+          $ref: '#/components/responses/Unauthorised'
+    post:
+      tags: [items]
+      operationId: createItem
+      summary: Add an item (S03)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemIn'
+      responses:
+        '201':
+          description: The item was added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemOut'
+        '401':
+          $ref: '#/components/responses/Unauthorised'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/Invalid'
+  /items/{item_id}:
+    parameters:
+      - name: item_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [items]
+      operationId: getItem
+      summary: Show one of my items (S04)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: The item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemOut'
+        '401':
+          $ref: '#/components/responses/Unauthorised'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: How many items to return
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 20
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: The next_cursor value from the previous page; leave it out for the first page
+      schema:
+        type: string
+  schemas:
+    SignUpIn:
+      type: object
+      required: [email, password, name]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 12
+        name:
+          type: string
+          maxLength: 120
+    LoginIn:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    TokenOut:
+      type: object
+      required: [access_token, token_type]
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+          enum: [bearer]
+    UserOut:
+      type: object
+      required: [id, email, name, role]
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        role:
+          type: string
+          description: Replace these with your product's roles
+          enum: [member, admin]
+    ItemIn:
+      type: object
+      required: [name, price_paise]
+      properties:
+        name:
+          type: string
+          maxLength: 120
+        price_paise:
+          type: integer
+          minimum: 0
+          description: Money is always a whole number of paise
+    ItemOut:
+      type: object
+      required: [id, name, price_paise, created_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        price_paise:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    ItemPage:
+      type: object
+      required: [items, next_cursor]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemOut'
+        next_cursor:
+          type: [string, 'null']
+          description: Pass it as cursor to get the next page; null on the last page
+    Error:
+      type: object
+      required: [detail]
+      properties:
+        detail:
+          description: A message, or for 422 a list of the fields that are not valid
+  responses:
+    Unauthorised:
+      description: Not signed in, or the access token has expired
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Signed in, but this role or user may not do this
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No such item, or it belongs to someone else
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The request clashes with data that already exists, such as an email already in use
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Invalid:
+      description: The body or the parameters are not valid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

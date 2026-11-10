@@ -1,0 +1,9 @@
+# Alert rules for Shortly. Prometheus loads this file (see prometheus.yml).
+# Check it after every change:
+#   MSYS_NO_PATHCONV=1 docker compose exec -T prometheus promtool check rules /etc/prometheus/alerts.yml
+groups:
+  - name: shortly
+    rules: []
+    # TODO(task 7): replace [] with the rule ShortlyHighErrorRate: the share of 5xx responses over
+    #   5 minutes is above 0.5% (your 99.5% SLO), `for: 2m`, with a severity label and a summary.
+    # TODO(task 8): add the rule that would have caught the drill's fault sooner, or a dashboard panel.

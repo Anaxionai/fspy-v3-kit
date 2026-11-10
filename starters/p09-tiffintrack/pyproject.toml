@@ -1,0 +1,28 @@
+[project]
+name = "tiffintrack"
+version = "0.1.0"
+description = "TiffinTrack: live food-delivery tracking for Pune (FSPY-V3 P9 Guided starter)."
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.162.3",
+    "httpx>=0.28.1",
+    "pymongo>=4.19.0",
+    "redis>=8.1.0",
+    "websockets>=17.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.4",
+]
+
+[tool.pytest.ini_options]
+# The API's code lives in api/app/, so tests import it as `app` (for example `from app.main import app`).
+pythonpath = ["api"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["api", "."]

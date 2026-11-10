@@ -1,0 +1,15 @@
+-- Search: the journeys on one date whose train stops at the "from" station
+-- before the "to" station, with the number of free seats on each.
+-- Test it in psql with real values, such as 'NDLS', 'BCT' and a date your
+-- seed covers. In app/routers/trains.py the same query uses bound
+-- parameters instead: :from_code, :to_code and :travel_date.
+--
+-- TODO(task 10): write the query below this comment.
+--   - Join `stops` twice: once for the "from" station and once for the "to"
+--     station. The "from" stop must come before the "to" stop.
+--   - Add the free seats: join the train's coaches and seats, LEFT JOIN the
+--     journey's confirmed bookings, GROUP BY the journey, and compute
+--     COUNT(seat) - COUNT(booking).
+--   - Select the TrainResult fields: journey_id, train_number, train_name,
+--     departs, arrives and free_seats.
+-- TODO(task 13): add ORDER BY the departure time, then LIMIT and OFFSET.

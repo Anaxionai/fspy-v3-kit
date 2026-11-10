@@ -1,0 +1,10 @@
+# Made when you run the kit's scripts and tests inside the kit
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+node_modules/
+
+# Data files that the kit's generators write when you run them in the kit's own folders
+data/upi/statement.csv
+data/railseat/scale/

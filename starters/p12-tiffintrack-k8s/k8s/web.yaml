@@ -1,0 +1,34 @@
+# The web app, served by nginx (task 9): a Deployment and a Service.
+# Until task 9 this file holds only comments, so kubectl apply -f k8s/ skips it.
+# TODO(task 9): select every line from "# apiVersion" to the end, press Ctrl+/ in VS Code to
+#   uncomment them, then fill in every TODO.
+#
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: web
+# spec:
+#   replicas: # TODO(task 9): how many web pods run
+#   selector:
+#     matchLabels: # TODO(task 9): the label that picks this Deployment's pods
+#   template:
+#     metadata:
+#       labels: # TODO(task 9): the same label
+#     spec:
+#       containers:
+#         - name: web
+#           image: # TODO(task 9): your web image and its version tag
+#           ports:
+#             - containerPort: # TODO(task 9): the port nginx listens on
+#           # TODO(task 22): resources: CPU and memory requests and limits.
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: web
+# spec:
+#   type: ClusterIP
+#   selector: # TODO(task 9): the web pods' label
+#   ports:
+#     - port: # TODO(task 9): the port the Ingress calls
+#       targetPort: # TODO(task 9): the container's port

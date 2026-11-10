@@ -1,0 +1,29 @@
+# MockPay for P6. In this folder run:   docker compose up --build
+# Then open http://localhost:9090/dashboard
+#
+# To change a setting, copy .env.example to .env and edit it.
+# Docker Compose reads .env by itself.
+name: mockpay
+
+services:
+  mockpay:
+    build: .
+    ports:
+      - "9090:9090"
+    environment:
+      MOCKPAY_WEBHOOK_URL: ${MOCKPAY_WEBHOOK_URL:-http://host.docker.internal:8000/payments/webhook}
+      MOCKPAY_WEBHOOK_SECRET: ${MOCKPAY_WEBHOOK_SECRET:-mockpay_test_secret}
+      MOCKPAY_API_KEY: ${MOCKPAY_API_KEY:-mp_test_key}
+      MOCKPAY_DUPLICATE_RATE: ${MOCKPAY_DUPLICATE_RATE:-0.3}
+      MOCKPAY_DELAY_SECONDS: ${MOCKPAY_DELAY_SECONDS:-2}
+      MOCKPAY_TIMEOUT_SECONDS: ${MOCKPAY_TIMEOUT_SECONDS:-30}
+    extra_hosts:
+      # Docker Desktop knows host.docker.internal already. Docker Engine on
+      # Linux and in WSL2 needs this line to reach your own computer.
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - mockpay-data:/data   # orders, payments and events survive a restart
+    restart: unless-stopped
+
+volumes:
+  mockpay-data:

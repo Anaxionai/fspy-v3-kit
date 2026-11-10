@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block head %}{% endblock %}
+  <title>{% block title %}MockPay{% endblock %}</title>
+  <style>
+    :root {
+      --ink: #1b2130;
+      --muted: #5d6677;
+      --line: #e2e5eb;
+      --page: #f5f6f8;
+      --card: #ffffff;
+      --head: #fafbfc;
+      --brand: #2f3bd0;
+      --good: #146c37;
+      --good-bg: #e3f4e9;
+      --bad: #b3261e;
+      --bad-bg: #fce8e6;
+      --wait: #7a5200;
+      --wait-bg: #fff1cc;
+      --plain: #3f4757;
+      --plain-bg: #edf0f4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+    }
+    a { color: var(--brand); }
+    code, .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.86em; }
+    h1 { font-size: 1.4rem; margin: 0 0 0.25rem; }
+    h2 { font-size: 1.05rem; margin: 0 0 0.6rem; }
+    .topbar {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.7rem 1.25rem; background: var(--card); border-bottom: 1px solid var(--line);
+    }
+    .brand { font-weight: 700; font-size: 1.05rem; color: var(--ink); text-decoration: none; }
+    .badge {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+      padding: 0.12rem 0.5rem; border-radius: 999px; background: var(--wait-bg); color: var(--wait);
+    }
+    .topbar nav { margin-left: auto; display: flex; gap: 1rem; font-size: 0.9rem; }
+    main { max-width: 1120px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
+    main.narrow { max-width: 460px; }
+    footer {
+      max-width: 1120px; margin: 0 auto; padding: 0 1rem 2rem;
+      color: var(--muted); font-size: 0.82rem; text-align: center;
+    }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; }
+    .muted { color: var(--muted); }
+    .small { font-size: 0.85rem; }
+    .pill {
+      display: inline-block; padding: 0.05rem 0.55rem; border-radius: 999px;
+      font-size: 0.78rem; font-weight: 600; white-space: nowrap;
+      background: var(--plain-bg); color: var(--plain);
+    }
+    .pill.good { background: var(--good-bg); color: var(--good); }
+    .pill.bad { background: var(--bad-bg); color: var(--bad); }
+    .pill.waiting { background: var(--wait-bg); color: var(--wait); }
+    {% block style %}{% endblock %}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/dashboard">MockPay</a>
+    <span class="badge">Test mode</span>
+    {% block nav %}<nav><a href="/dashboard">Dashboard</a><a href="/docs">API docs</a></nav>{% endblock %}
+  </header>
+  <main class="{% block main_class %}{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+  <footer>MockPay is not a real payment gateway. Never enter real card or UPI details anywhere on it.</footer>
+</body>
+</html>

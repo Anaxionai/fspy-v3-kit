@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[oc]
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environment (uv makes it again from uv.lock)
+.venv/
+
+# Local settings: commit .env.example, never .env
+.env

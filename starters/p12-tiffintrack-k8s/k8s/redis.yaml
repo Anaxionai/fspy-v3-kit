@@ -1,0 +1,37 @@
+# Redis for TiffinTrack: pub/sub, the last seq and the latest point of each rider.
+# Fill in every TODO(task 8), then: kubectl apply -f k8s/
+# TODO(task 20): turn the Deployment into a StatefulSet with its own volume, as the TODOs below say.
+apiVersion: apps/v1
+kind: Deployment # TODO(task 20): a StatefulSet
+metadata:
+  name: redis
+spec:
+  # TODO(task 20): serviceName, the headless Service below, which gives the pod its name (redis-0).
+  replicas: 1
+  selector:
+    matchLabels: # TODO(task 8): the label that picks this pod
+  template:
+    metadata:
+      labels: # TODO(task 8): the same label
+    spec:
+      containers:
+        - name: redis
+          image: # TODO(task 8): Redis 7
+          ports:
+            - containerPort: # TODO(task 8): the port Redis listens on
+          # TODO(task 20): a command that turns on append-only persistence, so Redis keeps its
+          #   data on disk, and volumeMounts: the volume data at /data.
+          # TODO(task 22): resources: CPU and memory requests and limits.
+  # TODO(task 20): volumeClaimTemplates: one claim named data, with the size from the brief.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  type: ClusterIP
+  # TODO(task 20): clusterIP: None, which makes this Service headless.
+  selector: # TODO(task 8): the Redis pod's label
+  ports:
+    - port: # TODO(task 8): the port other pods call
+      targetPort: # TODO(task 8): the container's port
