@@ -82,7 +82,7 @@ Use these major versions in workflow files, written as `uses: name@version`:
 | `docker/metadata-action` | `v6` |
 | `docker/build-push-action` | `v7` |
 
-Run jobs on `runs-on: ubuntu-24.04`.
+Run jobs on `runs-on: ubuntu-latest`, as the starters do. The `~/.actrc` line in the briefs gives `act` an image for `ubuntu-latest` only: with another label, `act` skips the job and still reports success.
 
 ## Images for your own Dockerfiles and Compose files
 
@@ -94,6 +94,7 @@ Run jobs on `runs-on: ubuntu-24.04`.
 | Prometheus | `prom/prometheus:v3.16.0` | pinned |
 | Grafana | `grafana/grafana:13.3.0` | pinned |
 | Local image registry for k3d | `registry:2` | pinned |
+| HTTPS reverse proxy for the P13 deploy | `caddy:2` (now `caddy:2.11.9`) | course version |
 
 ## Python libraries
 

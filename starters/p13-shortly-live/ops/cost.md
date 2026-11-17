@@ -1,6 +1,6 @@
 # What Shortly cost on AWS
 
-<!-- TODO(task 11): fill in the prices for Asia Pacific (Mumbai) and your own hours, and show
+<!-- TODO(task 13): fill in the prices for Asia Pacific (Mumbai) and your own hours, and show
      every sum. Then add the 30-day figure, the budget's actual spend from describe-budget
      (with the time you read it) and Cost Explorer's figure, and compare them.
      gp3 storage is priced per GB-month: turn it into a price per hour (a month is about 730 hours). -->

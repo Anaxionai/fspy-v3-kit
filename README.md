@@ -54,6 +54,8 @@ Every command in the kit's READMEs is written for **Git Bash**. [`setup/windows.
 | `mockpay/` | MockPay, the course's mock payment gateway, in Docker on port 9090 | P6 |
 | `capstone/` | How the capstone works, the four product briefs, and the plan template | CP1 to CP4 |
 | `starters/` | The Guided starters: a starting point for each project, for students on the Guided level | all projects |
+| `problem-sessions/` | The weekly problem sessions: a Big-O primer and two interview-style problems with tests for each week | weeks 5 to 27 |
+| `exam-packs/` | Optional self-study packs for the AWS Cloud Practitioner and Azure Fundamentals exams | after P13 |
 
 ## Running the kit's Python scripts
 

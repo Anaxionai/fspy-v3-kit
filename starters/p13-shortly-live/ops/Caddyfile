@@ -1,0 +1,8 @@
+# Caddy's settings for the live server (task 12). compose.live.yaml mounts this file at
+# /etc/caddy/Caddyfile. Caddy gets a Let's Encrypt certificate for the site address by itself,
+# once the DuckDNS name points at the server and ports 80 and 443 are open.
+# AxReview cannot read this file: copy its lines into ops/deploy.md as well.
+
+# TODO(task 12): one site block, three lines. Its address is the environment variable
+#   SITE_DOMAIN, written {$SITE_DOMAIN}, followed by an opening brace. Inside, one line indented
+#   with a tab: the reverse_proxy directive to the API service on port 8080. Then a closing brace.

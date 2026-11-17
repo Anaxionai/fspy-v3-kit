@@ -1,0 +1,16 @@
+# Additions for the live server only (task 12). On the server, give Compose both files:
+#   docker compose -f compose.yaml -f compose.live.yaml up -d --build
+#   docker compose -f compose.yaml -f compose.live.yaml ps
+# On your laptop, docker compose reads only compose.yaml, so local work does not change.
+services:
+  # TODO(task 12): add api here and stop publishing its port to the host. Ports in a second
+  #   file are added to the first file's list, so reset the list: ports: !reset []
+
+  caddy:
+    image: caddy:2
+    # TODO(task 12): publish ports 80 and 443.
+    # TODO(task 12): pass SITE_DOMAIN from the server's .env file, under environment.
+    # TODO(task 12): mount ./ops/Caddyfile at /etc/caddy/Caddyfile (read-only), and the named
+    #   volume caddy-data at /data. /data keeps the certificate: never delete that volume.
+
+# TODO(task 12): declare the named volume caddy-data under a top-level volumes: key.
