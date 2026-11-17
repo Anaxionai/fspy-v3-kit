@@ -68,7 +68,8 @@ GEMINI_EMBED_MODEL = os.environ.get("GEMINI_EMBED_MODEL", "")
 | 12 | `app/routers/ask.py` | `REFUSE_ABOVE`, `build_prompt`, `cited_rules`, `ask` |
 | 12 | `tests/test_chunk.py`, `tests/test_ask.py` | 3 and 3 tests |
 | 13 | `perf/perf.md`, `app/routers/ask.py` | `## Summary`, `## Ask RailSeat`, `## What it cost`, `## Not fixed`; timing the three steps of `/ask` |
-| 14 | none | The wrap-up writes `railseat/README.md` and `EXPLAIN.md` only, so it has no TODO. |
+| 14, 15 | none | The SQL for reports lesson and practice have no starter files. You run them in `psql` on your own bookings, and the practice files go in that task's own `practice/` folder. |
+| 16 | none | The wrap-up writes `railseat/README.md` and `EXPLAIN.md` only, so it has no TODO. |
 
 ## What you still write yourself
 - Every TODO above, and the migrations: your indexes (task 9), `name_search` (task 11) and

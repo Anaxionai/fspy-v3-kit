@@ -101,7 +101,7 @@ Every capstone has all six. For the two "or" parts, you choose one option.
 | Live updates or a small AI answer feature | Updates that appear without a refresh, through WebSockets and Redis pub/sub, or answers to questions about your own documents, with citations | TiffinTrack (P9) or Ask RailSeat (P10) |
 | Tests and a pipeline with infrastructure as code | Unit, API and end-to-end tests in a GitHub Actions pipeline, and OpenTofu that creates at least one resource on the cloud lab | Shortly ships (P11) |
 | Containers and Kubernetes | A Compose stack on your laptop, and a Helm chart that runs the product on k3d | Shortly (P7) and TiffinTrack on Kubernetes (P12) |
-| Observability, a real deploy and a cost report | Traces, metrics, a dashboard and one alert. One deploy to AWS behind a $5 budget alarm, torn down the same day. A report of the real cost. | TiffinTrack on Kubernetes (P12) and Shortly live (P13) |
+| Observability, a real deploy and a cost report | Traces, metrics, a dashboard and one alert. One deploy to AWS behind a $5 budget alarm: a server created with OpenTofu and served over HTTPS, torn down the same day. A report of the real cost. | TiffinTrack on Kubernetes (P12) and Shortly live (P13) |
 
 Reuse your own code from these projects: it is your parts bin. Copying another student's code is not reuse.
 

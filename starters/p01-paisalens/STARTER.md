@@ -22,7 +22,7 @@ It gives you no answers. Each function body raises
 
 Not included, because they are yours: `data/statement.csv` (task 6),
 `rules.json` (task 8), `tests/data/mini_statement.csv` (task 23) and
-`README.md` (task 25).
+`README.md` (task 27).
 
 ## Copy it in (task 6, step 1)
 
@@ -45,7 +45,7 @@ uv run pytest -q     # 4 skipped
 ```
 
 Then go on with step 3 of task 6. Step 2 also lists a `README.md`: you have
-this `STARTER.md` instead, and you write `README.md` in task 25.
+this `STARTER.md` instead, and you write `README.md` in task 27.
 
 `uv add --dev pytest` (task 10) and `uv add typer rich` (task 22) are done
 already. If you run them, nothing changes.
@@ -77,7 +77,10 @@ They do not count as your tests: the tests each task asks for are yours.
 | 23 | `tests/conftest.py`, `test_load.py`, `test_categorise.py`, `test_recurring.py`, `test_cli.py` | the fixtures and the pipeline tests |
 | 24 | `report.py`, `cli.py`, `tests/test_cli.py` | `bar`, `month_table`, `category_table`; the tables and `--plain` |
 
-Task 25, the wrap-up, has no TODO: you write `README.md` and `EXPLAIN.md`,
+Tasks 25 and 26, the automatic checks, have no starter files: in task 26
+you add ruff and a GitHub Actions workflow to your own `paisalens/`.
+
+Task 27, the wrap-up, has no TODO: you write `README.md` and `EXPLAIN.md`,
 not code.
 
 To see what is left, search the folder for `TODO` with Ctrl+Shift+F in
